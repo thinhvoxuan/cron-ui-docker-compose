@@ -1,0 +1,9 @@
+version: '2'
+
+services:
+  crontabui:
+    image: thinhvoxuan/crontab-ui
+    ports:
+      - 26006:8000
+    volumes:
+      - ./data/crontab-ui:/etc/crontabs
