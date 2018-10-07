@@ -1,9 +1,18 @@
-version: '2'
+version: "2"
 
 services:
   crontabui:
     image: thinhvoxuan/crontab-ui
-    ports:
-      - 26006:8000
     volumes:
       - ./data/crontab-ui:/etc/crontabs
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./.htpasswd:/etc/nginx/.htpasswd
+    depends_on:
+      - crontabui
+    links:
+      - crontabui
+    ports:
+      - 26006:8000
